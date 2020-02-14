@@ -9,7 +9,7 @@ from graphviz import Digraph
 
  
 # SQL 查询语句
-sql1 = "SELECT * from node1 where description=%s"
+sql1 = "select * from node1 where description=%s"
 sql2 = "select * from edge1 where start_id=%s"
 sql3 = "select * from node1 where id=%s"
 sql4 = "select * from node2 where parent_id=%s"
@@ -26,14 +26,28 @@ s4={'check':'右室检查','n_prpt':1,'value':[('右室','正常')]}
 
 
 fts=[s1,s2,s3,s4]
-
+'''
+#使用字典表示需要做的检查名及检查项目
 c1={'check':'左室检查','n_prpt':1,'value':['左室']}
 c2={'check':'肌小梁等检查1','n_prpt':5,'value':['肌小梁','非致密心肌','致密心肌','NC/C','CDFI']}
 c3={'check':'肌小梁增生运动检查','n_prpt':1,'value':['肌小梁增生的左室壁心肌运动']}
 c4={'check':'右室检查','n_prpt':1,'value':['右室']}
 cks=[c1,c2,c3,c4]
-
-
+'''
+def checkItems(cursor,table_name):
+    sql="select * from %s"
+    cursor.execute(sql%table_name)
+    items=cursor.fetchall()
+    res=[]
+    
+    for item in items:
+        ele={}
+        ele['check']=item['check']
+        ele['n_prpt']=item['n_prpt']
+        ele['value']=item['items'].split(',')
+        res.append(ele)
+    return res
+    
 def diagnose(nodes):
     if(len(nodes)==0):
         print('can not diagnose')
@@ -116,9 +130,13 @@ except:
     print('连接数据库失败')
 
 
-
 str1='四腔心'
 ss=Stack()
+
+cks=checkItems(cursor,'checkitems')
+
+#
+is_view=True
 #
 dot=Digraph(name='MyPicture',comment='the test',format='png')
 
@@ -185,6 +203,9 @@ while(not ss.is_empty()):
         ss.pushsq(rlts)
  
 print ("over...")
-dot.view()   
+if(is_view):
+    dot.view() 
+else:
+    dot.render()
 cursor.close()
 db.close()

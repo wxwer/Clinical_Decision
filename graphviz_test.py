@@ -14,7 +14,7 @@ sql5 = "select * from edge2 where start_id=%s"
 sql6 = "select * from edge1 where label=%s and start_id=%s"
 sql7 = "select * from node3 where label=%s and parent_id=%s"
 
-
+#输入某个节点的ID，输出以该节点为根节点的子树
 
 os.environ['PATH']
 try:
