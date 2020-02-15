@@ -4,38 +4,17 @@ from graphviz import Digraph
 import os
 import pymysql as mq
 from Stack import *
-
-
-sql1 = "select * from node1 where description=%s"
-sql2 = "select * from edge1 where start_id=%s"
-sql3 = "select * from node1 where id=%s"
-sql4 = "select * from node2 where parent_id=%s"
-sql5 = "select * from edge2 where start_id=%s"
-sql6 = "select * from edge1 where label=%s and start_id=%s"
-sql7 = "select * from node3 where label=%s and parent_id=%s"
-sql8 = "select * from edge1 where next_check=%s"
-sql9 = "select * from edge1 where id=%s"
-
-s1={'check':'左室检查','n_prpt':1,'value':[('左室','扩张')]}
-s2={'check':'肌小梁等检查1','n_prpt':5,'value':[('肌小梁','增多'),('非致密心肌','增多'),\
-            ('致密心肌','变薄'),('NC/C',5),('CDFI','可见')]}
-s3={'check':'肌小梁增生运动检查','n_prpt':1,'value':[('肌小梁增生的左室壁心肌运动','减低')]}
-s4={'check':'右室检查','n_prpt':1,'value':[('右室','正常')]}
-fts=[s1,s2,s3,s4]
-
+from sqls import *
+from test_data import *
+from get_cursor import *
 os.environ['PATH']
-try:
-    db=mq.connect("localhost","root","950823","grakn")
-    cursor = db.cursor(mq.cursors.DictCursor)
-except:
-    print('连接数据库失败')
 
 #根据输入的检查项目以及临床路径，判断出可能缺少的检查项目
 #注：只能判断出中间缺少的，不能判断出后续缺少的
 def detectLackFeatures(fts,cursor,is_view=True):
     cks=[ft['check'] for ft in fts]
     cks.append('心内膜检查')
-    dot=Digraph(name='LackFeatures',comment='the test',format='png')
+    dot=Digraph(name='./image/LackFeatures',comment='the test',format='png')
     dot.node('root',label='ROOT',color='blue')
     edge_set=[]
     node_set=[]
@@ -80,4 +59,8 @@ def detectLackFeatures(fts,cursor,is_view=True):
         dot.view()
     else:
         dot.render()
-detectLackFeatures(fts,cursor)
+db,cursor=get_cursor()
+if(cursor!=None):
+    detectLackFeatures(fts,cursor)
+    cursor.close()
+    db.close()

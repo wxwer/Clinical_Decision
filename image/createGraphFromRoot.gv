@@ -1,0 +1,38 @@
+// the test
+digraph "./image/createGraphFromRoot" {
+	1 [label="四腔心" color=red fontname=SimSun]
+	3 [label="右室扩张" fontname=SimSun]
+	1 -> 3 [label="右室检查" fontname=SimSun]
+	2 [label="左室扩张" fontname=SimSun]
+	1 -> 2 [label="左室检查" fontname=SimSun]
+	5 [label="肌小梁无明显增生，致密心肌无变薄" fontname=SimSun]
+	2 -> 5 [label="肌小梁等检查2" fontname=SimSun]
+	8 [label="心内膜无增厚，回声正常" fontname=SimSun]
+	5 -> 8 [label="心内膜检查" fontname=SimSun]
+	10 [label="厚度正常或变薄，心肌运动减低" fontname=SimSun]
+	8 -> 10 [label="左室壁检查" fontname=SimSun]
+	13 [label="无感染因素" fontname=SimSun]
+	10 -> 13 [label="感染因素检查" fontname=SimSun]
+	e6 [label="左室受累型扩张型心肌病" color=yellow fontname=SimSun]
+	13 -> e6 [label="疾病" color=yellow fontname=SimSun]
+	12 [label="母体抗SSA抗体阳性" fontname=SimSun]
+	10 -> 12 [label="母体抗SSA抗体检查" fontname=SimSun]
+	e5 [label="母体自身免疫性疾病导致继发左心室扩大" color=yellow fontname=SimSun]
+	12 -> e5 [label="疾病" color=yellow fontname=SimSun]
+	11 [label="有宫内感染史" fontname=SimSun]
+	10 -> 11 [label="宫内感染史检查" fontname=SimSun]
+	e4 [label="左室受累型心肌炎可能" color=yellow fontname=SimSun]
+	11 -> e4 [label="疾病" color=yellow fontname=SimSun]
+	7 [label="心内膜增厚，回声增强" fontname=SimSun]
+	5 -> 7 [label="心内膜检查" fontname=SimSun]
+	9 [label="厚度正常或变薄，心肌运动减低" fontname=SimSun]
+	7 -> 9 [label="左室壁检查" fontname=SimSun]
+	e3 [label="左室受累型心内膜弹力纤维增生症" color=yellow fontname=SimSun]
+	9 -> e3 [label="疾病" color=yellow fontname=SimSun]
+	4 [label="肌小梁明显增多，非致密心肌增厚，致密心肌变薄，NC/C>2,CDFI:隐窝内可见血流信号。" fontname=SimSun]
+	2 -> 4 [label="肌小梁等检查1" fontname=SimSun]
+	6 [label="肌小梁增生的左室壁心肌运动减低" fontname=SimSun]
+	4 -> 6 [label="肌小梁增生运动检查" fontname=SimSun]
+	e1 [label="左室受累型心肌致密化不全" color=yellow fontname=SimSun]
+	6 -> e1 [label="疾病" color=yellow fontname=SimSun]
+}

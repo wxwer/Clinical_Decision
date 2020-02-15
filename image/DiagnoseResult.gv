@@ -1,0 +1,16 @@
+// the test
+digraph "./image/DiagnoseResult" {
+	1 [label="四腔心" color=red fontname=SimSun]
+	3 [label="右室扩张" color=green fontname=SimSun]
+	1 -> 3 [label="右室检查" color=green fontname=SimSun]
+	2 [label="左室扩张" color=blue fontname=SimSun]
+	1 -> 2 [label="左室检查" color=blue fontname=SimSun]
+	5 [label="肌小梁无明显增生，致密心肌无变薄" color=green fontname=SimSun]
+	2 -> 5 [label="肌小梁等检查2" color=green fontname=SimSun]
+	4 [label="肌小梁明显增多，非致密心肌增厚，致密心肌变薄，NC/C>2,CDFI:隐窝内可见血流信号。" color=blue fontname=SimSun]
+	2 -> 4 [label="肌小梁等检查1" color=blue fontname=SimSun]
+	6 [label="肌小梁增生的左室壁心肌运动减低" color=blue fontname=SimSun]
+	4 -> 6 [label="肌小梁增生运动检查" color=blue fontname=SimSun]
+	end [label="确诊" color=yellow fontname=SimSun]
+	6 -> end [label="疾病" color=blue fontname=SimSun]
+}
